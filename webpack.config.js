@@ -4,15 +4,17 @@ const path = require('path');
 const webpack  = require('webpack');
 
 module.exports = function(env) {
+
   if(env){}else{env = 'dev'}
   let outDir;
+
   if(env === 'dev') {outDir = 'dev/js'}
   else if(env === 'prod') {outDir = 'dist/js'}
 
   console.log('---', env, '---');
 
   let config = {
-    entry: path.resolve(__dirname, 'home.js'),
+    entry: path.resolve(__dirname, 'src/js/home.js'),
     output: {
       filename: 'bundle.js',
       path: path.resolve(__dirname, outDir),
@@ -35,16 +37,17 @@ module.exports = function(env) {
     }
   }
 
+  // ONLY FOR DEVELOPMENT
   if(env === 'dev') {
     config.devServer = {
-      contentBase: './dev',
+      contentBase: './',
       hot: true,
       inline: true
     };
     config.plugins.push(new webpack.HotModuleReplacementPlugin());
   }
 
-
+  // ONLY FOR PRODUCTION
   if(env === 'prod') {
     config.plugins.push(
       new webpack.optimize.UglifyJsPlugin({

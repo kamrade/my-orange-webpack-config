@@ -4,7 +4,7 @@ let welcome = require('./welcome');
 welcome('home');
 
 if(env === 'dev') {
-  console.log('test');
+  console.log('testing');
 }
 
 let s = l => l*20;
